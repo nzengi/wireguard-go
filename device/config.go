@@ -92,7 +92,7 @@ func (device *Device) rotateKeys(config KeyRotationConfig) error {
 func (device *Device) notifyKeyChange(config KeyRotationConfig, publicKey NoisePublicKey) error {
 	// Create the request body
 	requestBody, err := json.Marshal(map[string]string{
-		"public_key": publicKey.String(),
+		"public_key": fmt.Sprintf("%x", publicKey[:]),
 	})
 	if err != nil {
 		return err

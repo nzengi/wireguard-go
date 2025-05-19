@@ -19,9 +19,10 @@ import (
 type ObfuscationType int
 
 const (
-	ObfuscationNone ObfuscationType = iota
-	ObfuscationWebSocket
-	ObfuscationTLS
+	// Exported constants for obfuscation types
+	OBFUSCATION_NONE ObfuscationType = iota
+	OBFUSCATION_WEBSOCKET
+	OBFUSCATION_TLS
 )
 
 // ObfuscationConfig holds configuration for traffic obfuscation
@@ -42,9 +43,9 @@ type WebSocketConfig struct {
 // wrapWithObfuscation wraps a connection with the configured obfuscation
 func (device *Device) wrapWithObfuscation(conn net.Conn, config ObfuscationConfig) (net.Conn, error) {
 	switch config.Type {
-	case ObfuscationWebSocket:
+	case OBFUSCATION_WEBSOCKET:
 		return device.wrapWithWebSocket(conn, config.WebSocketConfig)
-	case ObfuscationTLS:
+	case OBFUSCATION_TLS:
 		return device.wrapWithTLS(conn, config.TLSConfig)
 	default:
 		// No obfuscation
